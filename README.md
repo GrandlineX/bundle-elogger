@@ -25,7 +25,8 @@ GrandLineX is an out-of-the-box server framework.
 ![Code Smells](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Bundle-ELogger&metric=code_smells)
 
 
- 
 
-## Documentation 
-- [Docs](https://grandlinex.github.io/docs/)
+
+## Documentation
+- [Documentation](https://grandlinex.github.io/bundle-elogger/)
+- [GrandLineX Docs](https://grandlinex.github.io/docs/)
