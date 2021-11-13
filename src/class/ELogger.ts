@@ -1,11 +1,11 @@
 import * as Path from 'path';
-import CoreKernel, { CoreLogger } from '@grandlinex/core';
+import { CoreLogger, ICoreKernel } from '@grandlinex/core';
 import * as log from 'electron-log';
 
 export default class ELogger extends CoreLogger {
   logger: Map<string, log.LogFunctions>;
 
-  constructor(kernel: CoreKernel<any>) {
+  constructor(kernel: ICoreKernel<any>) {
     super();
     const store = kernel.getConfigStore();
     const path = store.get('GLOBAL_PATH_TEMP');
