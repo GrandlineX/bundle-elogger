@@ -60,29 +60,6 @@ class TestDB extends InMemDB{
 
 
 
-class TestDBUpdate extends CoreDBUpdate<any,any>{
-  constructor(db:CoreDBCon<any,any>) {
-    super("0","1",db);
-  }
-  async performe(): Promise<boolean> {
-    const db=this.getDb();
-
-    await db.setConfig("dbversion","1")
-    return true;
-  }
-
-}
-class TestEntity extends CoreEntity{
-  name:string
-  address?:string
-  age:number
-  constructor(name:string,age:number,address?:string) {
-    super(0);
-    this.name=name
-    this.age=age
-    this.address=address;
-  }
-}
 class TestModuel extends CoreKernelModule<TCoreKernel,TestDB,TestClient,null,null>{
   constructor(kernel:TCoreKernel) {
     super("testModule",kernel);
@@ -92,10 +69,8 @@ class TestModuel extends CoreKernelModule<TCoreKernel,TestDB,TestClient,null,nul
     this.setClient(new TestClient("testc",this))
     this.log("FirstTHIS")
     const db=new TestDB(this)
-    db.registerEntity(new TestEntity("",0,""))
-    this.setDb(db)
-    db.setUpdateChain(new TestDBUpdate(this.getDb() as CoreDBCon<any,any>))
-  }
+     this.setDb(db)
+   }
 
   startup(): Promise<void> {
     return Promise.resolve( undefined );
@@ -116,7 +91,5 @@ export {
   TestBaseMod,
   TestKernel,
   TestClient,
-  TestDBUpdate,
-  TestEntity,
   TestModuel,
  }
