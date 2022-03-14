@@ -1,7 +1,7 @@
 import * as Path from 'path';
 import {
   createFolderIfNotExist,
-  setupDevKernel,
+  setupDevKernel, TestContext,
   TestKernel,
 } from '@grandlinex/core';
 import { ELogger } from '../src';
@@ -13,8 +13,11 @@ const testPath = Path.join(__dirname, '..', 'data', 'config');
 
 createFolderIfNotExist(msiPath);
 createFolderIfNotExist(testPath);
-const kernel = TestKernel.getEntity(
-  new TestKernel(appName, appCode, testPath, __dirname, (k) => new ELogger(k))
+const [kernel] = TestContext.getEntity(
+    {
+      kernel:new TestKernel(appName, appCode, testPath, __dirname, (k) => new ELogger(k)),
+      cleanUpPath: testPath
+    }
 );
 
 setupDevKernel(kernel);
