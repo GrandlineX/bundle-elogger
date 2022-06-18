@@ -5,13 +5,17 @@ import * as log from 'electron-log';
 export default class ELogger extends CoreLogger {
   logger: Map<string, log.LogFunctions>;
 
-  constructor(kernel: ICoreKernel<any>) {
+  logError: undefined | ((message: string) => void);
+
+  constructor(kernel: ICoreKernel<any>, error?: (message: string) => void) {
     super();
     const store = kernel.getConfigStore();
-    const path = store.get('GLOBAL_PATH_TEMP');
+    const lPath = store.get('GLOBAL_PATH_LOG');
+    const path = lPath || store.get('GLOBAL_PATH_TEMP');
     if (!path) {
       throw new Error('No log path');
     }
+    this.logError = error;
     log.transports.file.resolvePath = () => Path.join(path, 'main.log');
     // this.logger = log.scope(scope);
     this.logger = new Map<string, log.LogFunctions>();
@@ -34,26 +38,39 @@ export default class ELogger extends CoreLogger {
   }
 
   log(channel: string, ...ags: unknown[]): void {
-    this.getLogger(channel).log(ags);
+    this.cbp(() => this.getLogger(channel).log(ags));
   }
 
   debug(channel: string, ...ags: unknown[]): void {
-    this.getLogger(channel).debug(ags);
+    this.cbp(() => this.getLogger(channel).debug(ags));
   }
 
   info(channel: string, ...ags: unknown[]): void {
-    this.getLogger(channel).info(ags);
+    this.cbp(() => this.getLogger(channel).info(ags));
   }
 
   error(channel: string, ...ags: unknown[]): void {
-    this.getLogger(channel).error(ags);
+    this.cbp(() => this.getLogger(channel).error(ags));
   }
 
   warn(channel: string, ...ags: unknown[]): void {
-    this.getLogger(channel).warn(ags);
+    this.cbp(() => this.getLogger(channel).warn(ags));
   }
 
   verbose(channel: string, ...ags: unknown[]): void {
-    this.getLogger(channel).verbose(ags);
+    this.cbp(() => this.getLogger(channel).verbose(ags));
+  }
+
+  /*
+   * catchBrokenPipe
+   */
+  cbp(fc: () => void) {
+    try {
+      fc();
+    } catch (e) {
+      this.logError?.(`ELogger: Broken pipe ${new Date().toString()}`);
+      console.error(`ELogger: Broken pipe ${new Date().toString()}`);
+      console.error(e);
+    }
   }
 }
