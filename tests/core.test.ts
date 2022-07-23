@@ -1,18 +1,14 @@
-import * as Path from 'path';
 import {
-  createFolderIfNotExist,
-  setupDevKernel, TestContext,
-  TestKernel,
+    setupDevKernel, TestContext,
+    TestKernel, XUtil,
 } from '@grandlinex/core';
 import { ELogger } from '../src';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
-const msiPath = Path.join(__dirname, '..', 'data');
-const testPath = Path.join(__dirname, '..', 'data', 'config');
 
-createFolderIfNotExist(msiPath);
-createFolderIfNotExist(testPath);
+const [testPath] =XUtil.setupEnvironment([__dirname,'..'],['data','config'])
+
 const [kernel] = TestContext.getEntity(
     {
       kernel:new TestKernel(appName, appCode, testPath, __dirname, (k) => new ELogger(k)),
