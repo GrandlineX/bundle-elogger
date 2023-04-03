@@ -1,6 +1,9 @@
 import {
-    setupDevKernel, TestContext,
-    TestKernel, XUtil,
+    JestLib,
+    setupDevKernel,
+    TestContext,
+    TestKernel,
+    XUtil,
 } from '@grandlinex/core';
 import { ELogger } from '../src';
 
@@ -18,8 +21,8 @@ const [kernel] = TestContext.getEntity(
 
 setupDevKernel(kernel);
 
-require('@grandlinex/core/dist/dev/lib/start');
-require('@grandlinex/core/dist/dev/lib/core');
-require('@grandlinex/core/dist/dev/lib/dbcon');
-require('@grandlinex/core/dist/dev/lib/end');
-require('@grandlinex/core/dist/dev/lib/orm');
+JestLib.jestStart();
+JestLib.jestCore();
+JestLib.jestDb();
+JestLib.jestEnd();
+JestLib.jestOrm();
