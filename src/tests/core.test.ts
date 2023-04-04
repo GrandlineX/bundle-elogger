@@ -5,7 +5,7 @@ import {
     TestKernel,
     XUtil,
 } from '@grandlinex/core';
-import { ELogger } from '../src';
+import { ELogger } from '../index.js';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';

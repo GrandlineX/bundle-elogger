@@ -4,7 +4,18 @@ export default {
   collectCoverageFrom: ["**/*.ts", "!**/node_modules/**","!tests/**"],
   testPathIgnorePatterns: ["/dist/", "/node_modules/"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+  extensionsToTreatAsEsm: [".ts"],
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1"
   },
+  transform: {
+    // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
+    // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        "useESM": true
+      }
+    ]
+  }
 };
