@@ -1,11 +1,5 @@
-import {
-    JestLib,
-    setupDevKernel,
-    TestContext,
-    TestKernel,
-    XUtil,
-} from '@grandlinex/core';
-import { ELogger } from '../index.js';
+import {JestLib, setupDevKernel, TestContext, TestKernel, XUtil,} from '@grandlinex/core';
+import {ELogger} from '../index.js';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';

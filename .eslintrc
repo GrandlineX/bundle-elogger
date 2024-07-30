@@ -33,6 +33,7 @@
     "no-plusplus": "warn",
     "no-restricted-syntax": "warn",
     "no-underscore-dangle": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
     "no-await-in-loop": "warn",
     "class-methods-use-this": "warn",
     "linebreak-style": "off",
