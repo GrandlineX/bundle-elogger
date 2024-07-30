@@ -16,7 +16,7 @@ export default class ELogger extends CoreLogger {
       throw new Error('No log path');
     }
     this.logError = error;
-    log.transports.file.resolvePath = () => Path.join(path, 'main.log');
+    log.transports.file.resolvePathFn = () => Path.join(path, 'main.log');
     // this.logger = log.scope(scope);
     this.logger = new Map<string, log.LogFunctions>();
 
