@@ -4,12 +4,11 @@ import {ELogger} from '../index.js';
 const appName = 'TestKernel';
 const appCode = 'tkernel';
 
-const [testPath] =XUtil.setupEnvironment([__dirname,'..'],['data','config'])
 
 const [kernel] = TestContext.getEntity(
     {
-      kernel:new TestKernel(appName, appCode, testPath, __dirname, (k) => new ELogger(k)),
-      cleanUpPath: testPath
+      kernel:new TestKernel(appName, appCode, __dirname, (k) => new ELogger(k)),
+      cleanUp:true
     }
 );
 
