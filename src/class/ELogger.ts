@@ -1,5 +1,5 @@
 import * as Path from 'path';
-import { CoreLogger, ICoreKernel } from '@grandlinex/core';
+import { CoreLogger, type ICoreKernel } from '@grandlinex/core';
 import * as log from 'electron-log';
 
 export default class ELogger extends CoreLogger {

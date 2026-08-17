@@ -1,5 +1,10 @@
-import {JestLib, setupDevKernel, TestContext, TestKernel, XUtil,} from '@grandlinex/core';
-import {ELogger} from '../index.js';
+import {
+    TestLib,
+    setupDevKernel,
+    TestContext,
+    TestKernel,
+} from '@grandlinex/core/dev';
+import { ELogger } from "../src";
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -14,8 +19,8 @@ const [kernel] = TestContext.getEntity(
 
 setupDevKernel(kernel);
 
-JestLib.jestStart();
-JestLib.jestCore();
-JestLib.jestDb();
-JestLib.jestEnd();
-JestLib.jestOrm();
+TestLib.testStart();
+TestLib.testCore();
+TestLib.testDb();
+TestLib.testEnd();
+TestLib.testOrm();
