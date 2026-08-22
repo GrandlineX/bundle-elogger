@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/bundle-elogger",
-  "version": "3.0.0-alpha.9",
+  "version": "3.0.0",
   "description": "",
   "type": "module",
   "exports": {
@@ -43,7 +43,7 @@
     "electron-log": "5.4.4"
   },
   "peerDependencies": {
-    "@grandlinex/core": "3.0.0-alpha.9"
+    "@grandlinex/core": "3.0.0"
   },
   "devDependencies": {
     "@types/node": "24.13.3",
